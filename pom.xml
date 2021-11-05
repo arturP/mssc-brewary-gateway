@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>io.artur.spring.gateway</groupId>
-	<artifactId>mssc-brewary-gateway</artifactId>
+	<artifactId>mssc-brewery-gateway</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>mssc-brewary-gateway</name>
+	<name>mssc-brewery-gateway</name>
 	<description>Spring API Gateway project</description>
 	<properties>
 		<java.version>11</java.version>
