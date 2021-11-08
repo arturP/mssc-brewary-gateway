@@ -16,9 +16,16 @@ public class LocalHostConfig {
 
         return builder.routes()
                 .route(r -> r.path("/api/v1/beer*", "/api/v1/beer/*", "/api/v1/beerUpc/*")
-                        .uri("http://localhost:8080"))
+                        .uri("lb://beer-service"))
                 .route(r -> r.path("/api/v1/customers/**")
-                        .uri("http://localhost:8081"))
+                        .uri("lb://order-service"))
+                .route(r -> r.path("/api/v1/beer/*/inventory")
+                        .filters(f -> f.circuitBreaker(cb -> cb.setName("inventoryCB")
+                                .setFallbackUri("forward:/inventory-failover")
+                                .setRouteId("inv-failover")))
+                        .uri("lb://inventory-service"))
+                .route(r -> r.path("/inventory-failover/**")
+                        .uri("lb://inventory-failover"))
                 .build();
     }
 }
